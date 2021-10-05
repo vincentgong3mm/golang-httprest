@@ -10,6 +10,13 @@ import (
 	"net/http"
 )
 
+type ClientCredential struct {
+	Web struct {
+		ClientId     string `json:"client_id"`
+		ClientSecret string `json:"client_secret"`
+	} `json:"web"`
+}
+
 var httpPort = 8080
 
 // Google Cloud Platform > Credentials > OAuth 2.0 Client IDs > Client ID
@@ -158,6 +165,22 @@ func ReqAccessToken(code string) (Token, int) {
 }
 
 func main() {
+
+	// Google Cloud Platform > Credentials에서 다운로드한 파일에서 client_id, client_secret를 읽습니다.
+	// client_id, client_secret를 별도의 파일에서 읽고, commit할 때 설정이 있는 파일은 commit하지 않습니다.
+	b, err := ioutil.ReadFile("./client_secret/client_secret.json")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// byte -> string
+	str := string(b)
+
+	var credential ClientCredential
+	json.Unmarshal([]byte(str), &credential)
+
+	clientID = credential.Web.ClientId
+	clientSecret = credential.Web.ClientSecret
 
 	http.HandleFunc("/", DefaultMain)
 	http.HandleFunc("/oauth", RedirectGoogleOAuth)
