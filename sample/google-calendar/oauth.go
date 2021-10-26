@@ -25,12 +25,16 @@ var clientID = "YOUR_CLIENT_ID"
 //Google Cloud Platform > Credentials > OAuth 2.0 Client IDs > Client Secret
 var clientSecret = "YOUR_CLIENT_SECRET"
 
+var AccessToken = ""
+
 // Toke은 인증 후 결과를 받은 json에서 access_token, toke_type을 구하기 위한 sturct입니다.
 // Step 5: Exchange authorization code for refresh and access tokens 단계 참고
 type Token struct {
 	AccessToken string `json:"access_token"`
 	TokenType   string `json:"token_type"`
 }
+
+var MyToken = Token{}
 
 func RandToken() string {
 	b := make([]byte, 32)
@@ -100,6 +104,12 @@ func RedirectCode(w http.ResponseWriter, r *http.Request) {
 		// 테스트를 위해서 access_token는 보내줍니다.
 		b, _ := json.Marshal(&t)
 		w.Write(b)
+
+		MyToken = t
+
+		log.Println("MyToken : ", MyToken)
+
+		//ReqCalEvents(t)
 	}
 }
 
@@ -185,6 +195,7 @@ func Serve() {
 	http.HandleFunc("/", DefaultMain)
 	http.HandleFunc("/oauth", RedirectGoogleOAuth)
 	http.HandleFunc("/redirectcode", RedirectCode)
+	http.HandleFunc("/gcal", ReqCalEvents)
 
 	log.Printf("Sever starting on port %v\n", httpPort)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", httpPort), nil))

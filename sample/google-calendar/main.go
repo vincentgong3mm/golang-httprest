@@ -39,4 +39,6 @@ func GetCollection(client *mongo.Client, colName string) *mongo.Collection {
 func main() {
 	account := LoadSetting()
 	log.Println(account)
+
+	Serve()
 }
