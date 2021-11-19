@@ -4,6 +4,7 @@
 유저별 calendar 정보를 저장합니다. 
 user_id에 google email id를 저장하고 조회하는 조건으로 사용합니다.
 response 할 때는 user_id를 제외하고 전달합니다.
+```json
 {
 	"user_id" : "my field", 
 	"kind": "google",
@@ -17,6 +18,7 @@ response 할 때는 user_id를 제외하고 전달합니다.
 	 ]
 	}
 }
+```
 ### 처리하는 google calendar api
 - https://developers.google.com/calendar/api/v3/reference#CalendarList, /users/me/calendarList/ 로 시작하는 모든 api
 - https://developers.google.com/calendar/api/v3/reference#Calendars, /calendars/<calendarId>로 시작하는 모든 api
