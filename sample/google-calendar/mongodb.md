@@ -21,7 +21,7 @@ response 할 때는 user_id를 제외하고 전달합니다.
 ```
 ### 처리하는 google calendar api
 - https://developers.google.com/calendar/api/v3/reference#CalendarList, /users/me/calendarList/ 로 시작하는 모든 api
-- https://developers.google.com/calendar/api/v3/reference#Calendars, /calendars/<calendarId>로 시작하는 모든 api
+- https://developers.google.com/calendar/api/v3/reference#Calendars, /calendars/:calendarId로 시작하는 모든 api
 
 
 ## event
