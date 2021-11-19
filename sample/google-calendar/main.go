@@ -36,6 +36,10 @@ func GetCollection(client *mongo.Client, colName string) *mongo.Collection {
 	return client.Database(dbName).Collection(colName)
 }
 
+// 테스트 방법
+// 1. http://localhost:8080/oauth
+// 2. http://localhost:8080/gcal
+
 func main() {
 	account := LoadSetting()
 	log.Println(account)

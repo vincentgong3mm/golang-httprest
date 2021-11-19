@@ -195,7 +195,10 @@ func Serve() {
 	http.HandleFunc("/", DefaultMain)
 	http.HandleFunc("/oauth", RedirectGoogleOAuth)
 	http.HandleFunc("/redirectcode", RedirectCode)
-	http.HandleFunc("/gcal", ReqCalEvents)
+	http.HandleFunc("/gcalevents", ReqCalEvents)
+	http.HandleFunc("/gcallist", ReqCalList)
+	http.HandleFunc("/gcallistid", ReqCalListID)
+	http.HandleFunc("/gcals", ReqCals)
 
 	log.Printf("Sever starting on port %v\n", httpPort)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", httpPort), nil))

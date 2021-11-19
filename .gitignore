@@ -4,6 +4,7 @@
 *.dll
 *.so
 *.dylib
+*.json
 
 # Test binary, built with `go test -c`
 *.test
@@ -16,3 +17,6 @@
 sample/google-oauthhttp/client_secret/client_secret.json
 sample/google-calendar/setting.json
 sample/google-calendar/client_secret/client_secret.json
+sample/google-calendar/dump.json
+sample/google-calendar/dump_callist.json
+sample/google-calendar/dump_events.json
