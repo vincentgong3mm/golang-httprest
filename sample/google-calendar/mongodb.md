@@ -26,6 +26,7 @@ response 할 때는 user_id를 제외하고 전달합니다.
 
 ## event
 유저의 calendar id별 events(일정)을 저장합니다.
+```json
 {
 	"kind": "",
 	"etag": "",
@@ -57,6 +58,7 @@ response 할 때는 user_id를 제외하고 전달합니다.
 	},
 	"eventType": ""
 }
+```
 
 ### 처리하는 google calendar api
 - https://developers.google.com/calendar/api/v3/reference#Events
