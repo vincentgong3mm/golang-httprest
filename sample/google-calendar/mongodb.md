@@ -1,5 +1,9 @@
 # google calendar의 정보를 저장할 mongodb의 db, collection, document입니다.
 
+# db
+## gcal
+
+# collection
 ## calendar
 유저별 calendar 정보를 저장합니다. 
 user_id에 google email id를 저장하고 조회하는 조건으로 사용합니다.
