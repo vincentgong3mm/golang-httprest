@@ -62,5 +62,17 @@ response 할 때는 user_id를 제외하고 전달합니다.
 
 ### 처리하는 google calendar api
 - https://developers.google.com/calendar/api/v3/reference#Events
+- paging : https://developers.google.com/calendar/api/guides/pagination
 
-
+# mongodb 기본 명령어 입니다.
+### $ show dbs
+### $ user gcalendar 
+### $ show collections
+### $ db.calendar.find()
+모든 document 검색
+### $ db.calendar.insert({kkk:"bbb"})
+document 하나 추가
+### $ db.calendar.remove({})
+document 모두 삭제
+### $ db.calendar.find({}, {summary:true})
+모든 document 검색 후 summary field만 표시 
