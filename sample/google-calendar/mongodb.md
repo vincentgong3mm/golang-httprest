@@ -80,3 +80,18 @@ document 하나 추가
 document 모두 삭제
 ### $ db.calendar.find({}, {summary:true})
 모든 document 검색 후 summary field만 표시 
+### $ db.userinfo.createIndex( { email: 1 }, { unique: true } )
+email field를 unique index로 생성
+### $ db.userinfo.createIndex( { firstName: 1, lastName: 1 }, { unique: true } )
+firstName, lastName을 복합인덱스, 복합 unique index로 생성
+
+### $ var obj = db.avatar.findOne()
+### $ for (var key in obj) {print(key, typeof obj[key]);}
+#### _id object
+#### avatar_name string
+#### avatar_level string
+#### equipment string
+#### user_name string
+collection의 schema 확인하기 https://medium.com/@ahsan.ayaz/how-to-find-schema-of-a-collection-in-mongodb-d9a91839d992
+
+
