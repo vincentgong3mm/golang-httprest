@@ -37,7 +37,7 @@ func loadSetting() Account {
 	return account
 }
 
-func Connect() error {
+func Connect() (*mongo.Client, error) {
 	acc := loadSetting()
 
 	ctx, cancelFunc := context.WithTimeout(context.Background(), 10*time.Second)
@@ -52,18 +52,18 @@ func Connect() error {
 	client, err := mongo.Connect(ctx, clientOptions)
 	if err != nil {
 		log.Fatal(err)
-		return err
+		return nil, err
 	}
 
 	// 연결 검증
 	err = client.Ping(context.Background(), nil)
 	if err != nil {
 		log.Fatal(err)
-		return err
+		return nil, err
 	}
 
 	log.Println("Connect Ok.", "User:", acc.UserName, "URI:", MongoDBCloudDBURI)
-	return nil
+	return client, nil
 }
 
 // GetCollection은 mongdb접속 정보에서 지정한 db의 collection 정보를 구합니다.
