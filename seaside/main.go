@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/vincentgong3mm/golang-httprest/seaside/mongowrap"
+	"github.com/vincentgong3mm/golanghttprest/seaside/mongowrap"
 )
 
 func main() {
@@ -12,4 +12,3 @@ func main() {
 	acc := mongowrap.LoadSetting()
 	fmt.Println(acc)
 }
-
