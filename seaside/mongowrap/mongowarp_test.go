@@ -1,63 +1,35 @@
 package mongowrap
 
 import (
-	"context"
-	"fmt"
 	"log"
 	"testing"
-	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func TestLoadConfig(t *testing.T) {
-	acc := loadSetting()
-
-	fmt.Println(acc)
-}
+var MongDBTestURI = "mongodb+srv://cluster0.izgwf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
 
 func TestConnect(t *testing.T) {
-	log.Println(Connect())
+	config := LoadDBSetting("./for_test_setting.json")
+
+	conn := NewMongoConn()
+	conn.Connect(config)
 }
 
-func TestSelectCollection(t *testing.T) {
-	acc := loadSetting()
+func TestFindCollection(t *testing.T) {
+	config := LoadDBSetting("./for_test_setting.json")
 
-	ctx, cancelFunc := context.WithTimeout(context.Background(), 10*time.Second)
-	clientOptions := options.Client().ApplyURI(MongoDBCloudDBURI).SetAuth(options.Credential{
-		AuthSource: "",
-		Username:   acc.UserName,
-		Password:   acc.Password,
-	})
-	defer cancelFunc()
+	conn := NewMongoConn()
+	conn.Connect(config)
 
-	// mongodb 연결
-	client, err := mongo.Connect(ctx, clientOptions)
-	if err != nil {
+	//findCol := FindCollection{DBName: "seaside_user", CollectionName: "user"}
+	//findCol.Query = bson.M{"user_name": "vcassel"}
+
+	findCol := FindCollection{DBName: "seaside_user", CollectionName: "user", Query: bson.M{"user_name": "vcassel"}}
+	if err := conn.Find(&findCol); err != nil {
 		log.Fatal(err)
 		return
 	}
 
-	// 연결 검증
-	err = client.Ping(context.Background(), nil)
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-
-	log.Println("Connect Ok.", "User:", acc.UserName, "URI:", MongoDBCloudDBURI)
-
-	userCollection := GetCollection(client, "seaside_user", "user")
-	cursor, err := userCollection.Find(ctx, bson.M{})
-	if err != nil {
-		log.Fatal(err)
-	}
-	var users []bson.M
-	if err = cursor.All(ctx, &users); err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println(users)
-
+	log.Println(findCol)
 }
