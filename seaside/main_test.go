@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/http/httptest"
 	"testing"
 
 	"github.com/vincentgong3mm/golanghttprest/seaside/mongowrap"
@@ -10,6 +11,7 @@ import (
 )
 
 func TestMain(t *testing.T) {
+	return
 	fmt.Println("test hello world")
 
 	config := mongowrap.LoadDBSetting("./db_setting.json")
@@ -24,9 +26,30 @@ func TestMain(t *testing.T) {
 
 	log.Println(findCol)
 }
-
 func TestLogPrint(t *testing.T) {
 	NewSlog()
 	sl.Info.Println("info log.")
 	sl.Error.Println("error log.")
+}
+
+func TestAPISearchUser(t *testing.T) {
+	NewSlog()
+
+	handler := SearchUser{}
+	request := httptest.NewRequest("GET", "/user", nil)
+	response := httptest.NewRecorder()
+
+	handler.ServeHTTP(response, request)
+
+	sl.Info.Println(response)
+}
+
+func TestSetUpAPI(t *testing.T) {
+	NewSlog()
+
+	handler := SearchUser{}
+	response := setUpAPITest(handler, "GET", "/user", nil)
+	
+	sl.Info.Println(response)
+
 }

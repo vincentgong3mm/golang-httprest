@@ -26,7 +26,9 @@ type MongoConn struct {
 
 func NewMongoConn() *MongoConn {
 	conn := &MongoConn{}
-	conn.ctx, conn.cancelFunc = context.WithTimeout(context.Background(), 10*time.Second)
+
+	// context의 timeout 시간이 짧으면 context deadline exceeded 에러 발생합니다.
+	conn.ctx, conn.cancelFunc = context.WithTimeout(context.Background(), 30*time.Second)
 	conn.client = nil
 	return conn
 }
