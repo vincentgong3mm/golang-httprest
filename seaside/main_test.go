@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"strings"
 	"net/http/httptest"
 	"testing"
 
@@ -44,12 +45,22 @@ func TestAPISearchUser(t *testing.T) {
 	sl.Info.Println(response)
 }
 
-func TestSetUpAPI(t *testing.T) {
+func TestSetUpAPIGetUser(t *testing.T) {
 	NewSlog()
 
-	handler := SearchUser{}
+	handler := &SearchUser{}
 	response := setUpAPITest(handler, "GET", "/user", nil)
-	
+
+	sl.Info.Println(response)
+
+}
+
+func TestSetUpAPIPostUser(t *testing.T) {
+	NewSlog()
+
+	handler := &SearchUser{}
+	response := setUpAPITest(handler, "POST", "/user", strings.NewReader("test post body data."))
+
 	sl.Info.Println(response)
 
 }

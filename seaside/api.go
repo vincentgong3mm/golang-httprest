@@ -8,7 +8,6 @@ import (
 
 // 참고 사이트 : building-microservices-with-go
 // - https://github.com/building-microservices-with-go/chapter4/tree/master/handlers
-
 func setUpAPITest(handler http.Handler, method, target string, d io.Reader) *httptest.ResponseRecorder {
 
 	response := httptest.NewRecorder()
@@ -18,9 +17,6 @@ func setUpAPITest(handler http.Handler, method, target string, d io.Reader) *htt
 		handler.ServeHTTP(response, request)
 	} else {
 		request := httptest.NewRequest(method, target, d)
-		sl.Info.Println("test request")
-		sl.Info.Println(request)
-
 		handler.ServeHTTP(response, request)
 	}
 
@@ -36,18 +32,26 @@ type ReqQuery struct {
 
 func (s *SearchUser) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	sl.Info.Println(req.URL.Path)
+	sl.Info.Println(req.Method)
 	sl.Info.Println(req.URL.Query())
-	sl.Info.Println("log req all")
 
-	sl.Info.Println(req)
+	switch req.Method {
+	case http.MethodGet:
+	case http.MethodPost:
+		len := req.ContentLength
+		body := make([]byte, len)
+		req.Body.Read(body)
+		sl.Info.Println("Body : ", string(body))
+	case http.MethodDelete:
+		len := req.ContentLength
+		body := make([]byte, len)
+		req.Body.Read(body)
+		sl.Info.Println("Body : ", string(body))
+	}
+
+	//sl.Info.Println(req)
 
 	w.Write([]byte("Hello http api"))
-
-	len := req.ContentLength
-	body := make([]byte, len)
-	req.Body.Read(body)
-	sl.Info.Println("body : ", string(body))
-
 }
 
 func NewServe() {
