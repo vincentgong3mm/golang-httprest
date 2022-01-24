@@ -31,7 +31,7 @@ func main() {
 	NewSlog()
 	sl.Info.Println("Hello World!")
 
-	//NewServe()
+	NewServe()
 
 	//TestMongoDB()
 

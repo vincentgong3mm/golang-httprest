@@ -2,7 +2,7 @@
 | 명령어 | 설명 |
 | ------ | ----------- |
 | show dbs | db 목록 조회 |
-| use `DB_NAME` | `DB_NAME`사용하도록 변경 |
+| use `DB_NAME` | `DB_NAME`사용하도록 변경,  `DB_NAME`이 없으면 생성함 |
 | db.`COLLECTION_NAME`.find()  | `COLLECTION_NAME`에 있는 데이터(Document)모두 조회|
 | db.`COLLECTION_NAME`.insert({`name`:`my name`}) | `COLLECTION_NAME`에 `name` field에 `my name` 데이터를 추가 |
 | db.`COLLECTION_NAME`.remove({})| 모든 Document 삭제|
@@ -63,4 +63,3 @@ email string
 > item_name string
 > avatar_name string
 > ```
-
