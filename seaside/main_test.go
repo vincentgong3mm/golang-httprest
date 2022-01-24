@@ -12,7 +12,6 @@ import (
 )
 
 func TestMain(t *testing.T) {
-	return
 	fmt.Println("test hello world")
 
 	config := mongowrap.LoadDBSetting("./db_setting.json")

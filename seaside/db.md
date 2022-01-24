@@ -1,10 +1,15 @@
 ### mongodb 기본 명령어 입니다.
+
+[참고링크](https://velopert.com/mongodb-tutorial-list)
+
 | 명령어 | 설명 |
 | ------ | ----------- |
 | show dbs | db 목록 조회 |
 | use `DB_NAME` | `DB_NAME`사용하도록 변경,  `DB_NAME`이 없으면 생성함 |
 | db.`COLLECTION_NAME`.find()  | `COLLECTION_NAME`에 있는 데이터(Document)모두 조회|
 | db.`COLLECTION_NAME`.insert({`name`:`my name`}) | `COLLECTION_NAME`에 `name` field에 `my name` 데이터를 추가 |
+| db.`COLLECTION_NAME`.update({`name`:`my name`}, {`name`:`my name`, `email`: `my email`}) | Document 전체 변경, `COLLECTION_NAME`에 `name` field가 `my name` 데이터의 Document를 변경 |
+| db.`COLLECTION_NAME`.update({`name`:`my name`}, {$set : {`email`: `my email2`}}) | Document의 특정 field변경, `COLLECTION_NAME`에 `name` field가 `my name` 데이터의 `email` field를 `my email2`로 변경 |
 | db.`COLLECTION_NAME`.remove({})| 모든 Document 삭제|
 | db.`COLLECTION_NAME`.find({}, {`email`:true}) | 모든 Document 검색 후 `email` field만 표시|
 | db.`COLLECTION_NAME`.createIndex( { email: 1 }, { unique: true } )|`email` field로 unique index 생성|
