@@ -1,0 +1,10 @@
+FROM golang:1.16-buster
+
+# Install tools
+RUN apt-get update \
+    && apt-get -y -f dist-upgrade \
+    && apt-get install -y -f \
+        vim \
+        git \
+        file \
+    && apt-get clean -y
