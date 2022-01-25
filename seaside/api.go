@@ -55,6 +55,7 @@ func (s *SearchUser) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 }
 
 func NewServe() {
+	sl.Info.Println("start NewServe" + ":8080")
 	http.Handle("/user", new(SearchUser))
 
 	http.ListenAndServe(":8080", nil)
