@@ -8,3 +8,6 @@ RUN apt-get update \
         git \
         file \
     && apt-get clean -y
+
+RUN echo "set encoding=utf-8" >> /root/.vimrc \
+  && echo "set fileencodings=utf-8" >> /root/.vimrc
