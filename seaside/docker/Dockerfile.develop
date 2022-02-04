@@ -9,5 +9,6 @@ RUN apt-get update \
         file \
     && apt-get clean -y
 
+# .vimrc 파일 생성 하고 utf-8설정 쓰기
 RUN echo "set encoding=utf-8" >> /root/.vimrc \
   && echo "set fileencodings=utf-8" >> /root/.vimrc
