@@ -4,6 +4,7 @@ import (
 	"io"
 	"net/http"
 	"net/http/httptest"
+	_ "github.com/vincentgong3mm/golanghttprest/seaside/docs"
 )
 
 // 참고 사이트 : building-microservices-with-go
@@ -23,6 +24,13 @@ func setUpAPITest(handler http.Handler, method, target string, d io.Reader) *htt
 	return response
 }
 
+
+type User struct {
+}
+
+type GetUser struct {
+}
+
 type SearchUser struct {
 }
 
@@ -30,6 +38,24 @@ type ReqQuery struct {
 	Query string `json:"query"`
 }
 
+// @Summary Get user
+// @Description Get user's info
+// @Accept json
+// @Produce json
+// @Param name path string true "name of the user"
+// @Success 200 {object} User
+// @Router /user/{name} [get]
+func (g *GetUser) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	w.Write([]byte("GetUser"))
+}
+
+// @Summary Search User
+// @Description Search User's Info
+// @Accept json
+// @Produce json
+// @Param name path string true "name of the user"
+// @Success 200 {object} User
+// @Router /user2/{name} [get]
 func (s *SearchUser) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	sl.Info.Println(req.URL.Path)
 	sl.Info.Println(req.Method)
@@ -56,7 +82,13 @@ func (s *SearchUser) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 
 func NewServe() {
 	sl.Info.Println("start NewServe" + ":8080")
-	http.Handle("/user", new(SearchUser))
+
+	// 아래와 같이 해야지 /만 있는 경로가 아닌 /docs/ 경로설정 가능합니다.
+	fs := http.FileServer(http.Dir("./docs"))
+	http.Handle("/docs/", http.StripPrefix("/docs", fs))
+
+	http.Handle("/user", new(GetUser))
+	http.Handle("/user2", new(SearchUser))
 
 	http.ListenAndServe(":8080", nil)
 }

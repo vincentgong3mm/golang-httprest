@@ -1,0 +1,45 @@
+definitions:
+  main.User:
+    type: object
+info:
+  contact: {}
+paths:
+  /user/{name}:
+    get:
+      consumes:
+      - application/json
+      description: Get user's info
+      parameters:
+      - description: name of the user
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.User'
+      summary: Get user
+  /user2/{name}:
+    get:
+      consumes:
+      - application/json
+      description: Search User's Info
+      parameters:
+      - description: name of the user
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.User'
+      summary: Search User
+swagger: "2.0"

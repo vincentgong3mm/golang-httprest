@@ -1,5 +1,7 @@
 ### mongodb 기본 명령어 입니다.
 
+**atom 에디터에서 preview : ctl+shift+m**
+
 [참고링크](https://velopert.com/mongodb-tutorial-list)
 
 | 명령어 | 설명 |
